@@ -1,0 +1,47 @@
+document.querySelector("form")?.addEventListener("submit", function(e) {
+  e.preventDefault();
+  alert("Booking request sent! We will contact you shortly.");
+});
+let rentals = [
+  { name: "1 Bedroom Apartment", price: 5000 },
+  { name: "2 Bedroom Villa", price: 8000 }
+];
+
+rentals.forEach(function (rental) {
+  console.log(rental.name + " - KES " + rental.price);
+});
+script>
+  document.getElementById("bookingForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let checkin = document.getElementById("checkin").value;
+    let checkout = document.getElementById("checkout").value;
+    let pricePerNight = 8000;
+
+    let start = new Date(checkin);
+    let end = new Date(checkout);
+    let nights = (end - start) / (1000 * 60 * 60 * 24);
+
+    if (nights <= 0) {
+      alert("Check-out date must be after check-in date");
+      return;
+    }
+
+    let total = nights * pricePerNight;
+
+    let message =
+      "Hello, I want to book a rental in Diani.%0A" +
+      "Name: " + name + "%0A" +
+      "Check-in: " + checkin + "%0A" +
+      "Check-out: " + checkout + "%0A" +
+      "Nights: " + nights + "%0A" +
+      "Total Price: KES " + total;
+
+    let phone = "254700000000"; // replace with your WhatsApp number
+    window.open("https://wa.me/" + phone + "?text=" + message, "_blank");
+  });
+</script>
+
+</body>
+</html>
